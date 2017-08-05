@@ -14,6 +14,7 @@ namespace ControlSystemDesign
     [STAThread]
     static void Main()
     {
+      // set 
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new Form1());
