@@ -535,14 +535,11 @@ namespace ControlSystemDesign
     private void Run_Click_1(object sender, EventArgs e)
     {
       Process p = new Process();
-      p.StartInfo.FileName = @"U:\John\Documents\Software Projects\MatrixSolutions\x64\Release\ControlSystemClients.exe";
-      p.StartInfo.Arguments = "";
       p.StartInfo.UseShellExecute = false;
+      p.StartInfo.FileName = "U:\\John\\Documents\\Software Projects\\MatrixSolutions\\x64\\Release\\ControlSystemClients.exe";
       p.StartInfo.CreateNoWindow = true;
-      p.StartInfo.RedirectStandardOutput = true;
       p.Start();
-//            p.WaitForExit();
-
+      p.WaitForExit();
     }
   }
 }
