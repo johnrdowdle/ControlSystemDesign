@@ -48,7 +48,7 @@ namespace ControlSystemDesign
       // the first part of file has the open-loop plant frequency response
       int startIndex = records.Length + 1;
       int endIndex = startIndex + 1;
-      for (int i = 0; i<n; i++)
+      for (int i = 0; i < n; i++)
       {
         if (records[i].Contains("//") && (startIndex > records.Length) && (endIndex > records.Length))
         {
@@ -58,7 +58,7 @@ namespace ControlSystemDesign
         {
           startIndex = i + 1;
         }
-        else if (records[i].Contains("//") && (startIndex<records.Length) && (endIndex > records.Length))
+        else if (records[i].Contains("//") && (startIndex < records.Length) && (endIndex > records.Length))
         {
           endIndex = i;
         }
@@ -68,7 +68,7 @@ namespace ControlSystemDesign
       m = endIndex - startIndex + 1;
 
       // grab the data
-      for (int i = startIndex; i<endIndex; i++)
+      for (int i = startIndex; i < endIndex; i++)
       {
         char delimiter = ' ';
         String[] substrings = records[i].Split(delimiter);
@@ -104,7 +104,7 @@ namespace ControlSystemDesign
       // reset startIndex and endIndex for next part of search
       startIndex = records.Length + 1;
       endIndex = startIndex + 1;
-      for (int i = startSearch; i<n; i++)
+      for (int i = startSearch; i < n; i++)
       {
         // find the top of the closed-loop h2-compensator frequency response
         if (records[i].Contains("//**") && (startIndex > records.Length) && (endIndex > records.Length))
@@ -122,7 +122,7 @@ namespace ControlSystemDesign
           startIndex = i + 1;
         }
         // find next data group
-        else if (records[i].Contains("//**") && (startIndex<records.Length) && (endIndex > records.Length))
+        else if (records[i].Contains("//**") && (startIndex < records.Length) && (endIndex > records.Length))
         {
           endIndex = i;
         }
@@ -136,10 +136,10 @@ namespace ControlSystemDesign
       //    2.  transfer from w to y (y/w)
       //    3.  transfer from w to u (u/w)
       // the strucuture of the data is:  [m data lines; 2 comments; m data lines; 2 comments; m data lines]
-      for (int k = 0; k<  3; k++)
+      for (int k = 0; k < 3; k++)
       {
 
-        for (int i = startIndex + k* (m + 2); i<startIndex + m + k*(m + 2); i++)
+        for (int i = startIndex + k* (m + 2); i < startIndex + m + k*(m + 2); i++)
         {
           char delimiter = ' ';
           String[] substrings = records[i].Split(delimiter);
@@ -189,7 +189,7 @@ namespace ControlSystemDesign
       // reset startIndex and endIndex for next part of search
       startIndex = records.Length + 1;
       endIndex = startIndex + 1;
-      for (int i = startSearch; i<n; i++)
+      for (int i = startSearch; i < n; i++)
       {
         // find the top of the closed-loop h2-compensator frequency response
         if (records[i].Contains("//**") && (startIndex > records.Length) && (endIndex > records.Length))
@@ -207,7 +207,7 @@ namespace ControlSystemDesign
           startIndex = i + 1;
         }
         // find next data group
-        else if (records[i].Contains("//**") && (startIndex<records.Length) && (endIndex > records.Length))
+        else if (records[i].Contains("//**") && (startIndex < records.Length) && (endIndex > records.Length))
         {
           endIndex = i;
         }
@@ -221,10 +221,10 @@ namespace ControlSystemDesign
       //    2.  transfer from w to y (y/w)
       //    3.  transfer from w to u (u/w)
       // the strucuture of the data is:  [m data lines; 2 comments; m data lines; 2 comments; m data lines]
-      for (int k = 0; k<  3; k++)
+      for (int k = 0; k < 3; k++)
       {
 
-        for (int i = startIndex + k* (m + 2); i<Math.Min(startIndex + m + k* (m + 2), records.Length); i++)
+        for (int i = startIndex + k* (m + 2); i < Math.Min(startIndex + m + k* (m + 2), records.Length); i++)
         {
           char delimiter = ' ';
           String[] substrings = records[i].Split(delimiter);
