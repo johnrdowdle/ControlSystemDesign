@@ -43,57 +43,11 @@
       this.ResultsText = new System.Windows.Forms.RichTextBox();
       this.LoadResults = new System.Windows.Forms.Button();
       this.Run = new System.Windows.Forms.Button();
+      this.Quit = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.ChartPlant)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charth2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charthinf)).BeginInit();
       this.SuspendLayout();
-      // 
-      // ControlSystemDesign
-      // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.AutoSize = true;
-      this.ClientSize = new System.Drawing.Size(3828, 2097);
-      this.Controls.Add(this.Run);
-      this.Controls.Add(this.LoadResults);
-      this.Controls.Add(this.ResultsText);
-      this.Controls.Add(this.Charthinf);
-      this.Controls.Add(this.Charth2);
-      this.Controls.Add(this.Plothinf);
-      this.Controls.Add(this.Ploth2);
-      this.Controls.Add(this.ChartPlant);
-      this.Controls.Add(this.PlotPlant);
-      this.Name = "ControlSystemDesign";
-      this.Text = "Control System Design";
-      this.Load += new System.EventHandler(this.ControlSystemDesign_Load);
-      // 
-      // Run
-      // 
-      this.Run.Location = new System.Drawing.Point(29, 50);
-      this.Run.Name = "Run";
-      this.Run.Size = new System.Drawing.Size(122, 60);
-      this.Run.TabIndex = 10;
-      this.Run.Text = "Run";
-      this.Run.UseVisualStyleBackColor = true;
-      this.Run.Click += new System.EventHandler(this.Run_Click_1);
-      // 
-      // LoadResults
-      // 
-      this.LoadResults.Location = new System.Drawing.Point(670, 1975);
-      this.LoadResults.Name = "LoadResults";
-      this.LoadResults.Size = new System.Drawing.Size(400, 50);
-      this.LoadResults.TabIndex = 9;
-      this.LoadResults.Text = "Load Results";
-      this.LoadResults.UseVisualStyleBackColor = true;
-      this.LoadResults.Click += new System.EventHandler(this.LoadResults_Click);
-      // 
-      // ResultsText
-      // 
-      this.ResultsText.Location = new System.Drawing.Point(175, 50);
-      this.ResultsText.Name = "ResultsText";
-      this.ResultsText.Size = new System.Drawing.Size(1500, 1900);
-      this.ResultsText.TabIndex = 8;
-      this.ResultsText.Text = "";
       // 
       // PlotPlant
       // 
@@ -115,8 +69,7 @@
       this.ChartPlant.Name = "ChartPlant";
       this.ChartPlant.Size = new System.Drawing.Size(2000, 550);
       this.ChartPlant.TabIndex = 3;
-      this.ChartPlant.Text = "ChartPlant";
-      this.ChartPlant.Click += new System.EventHandler(this.ChartPlant_Click);
+      this.ChartPlant.Text = "Plant Frequency Response";
       // 
       // Ploth2
       // 
@@ -128,6 +81,16 @@
       this.Ploth2.UseVisualStyleBackColor = true;
       this.Ploth2.Click += new System.EventHandler(this.Ploth2_Click);
       // 
+      // Plothinf
+      // 
+      this.Plothinf.Location = new System.Drawing.Point(2532, 1975);
+      this.Plothinf.Name = "Plothinf";
+      this.Plothinf.Size = new System.Drawing.Size(400, 50);
+      this.Plothinf.TabIndex = 5;
+      this.Plothinf.Text = "hinf-Design";
+      this.Plothinf.UseVisualStyleBackColor = true;
+      this.Plothinf.Click += new System.EventHandler(this.Plothinf_Click);
+      // 
       // Charth2
       // 
       chartArea2.Name = "h2FreqRsp";
@@ -138,18 +101,7 @@
       this.Charth2.Name = "Charth2";
       this.Charth2.Size = new System.Drawing.Size(2000, 550);
       this.Charth2.TabIndex = 6;
-      this.Charth2.Text = "Charth2";
-      this.Charth2.Click += new System.EventHandler(this.Charth2_Click);
-      // 
-      // Plothinf
-      // 
-      this.Plothinf.Location = new System.Drawing.Point(2532, 1975);
-      this.Plothinf.Name = "Plothinf";
-      this.Plothinf.Size = new System.Drawing.Size(400, 50);
-      this.Plothinf.TabIndex = 5;
-      this.Plothinf.Text = "hinf-Design";
-      this.Plothinf.UseVisualStyleBackColor = true;
-      this.Plothinf.Click += new System.EventHandler(this.Plothinf_Click);
+      this.Charth2.Text = "h2 Frequency Response";
       // 
       // Charthinf
       // 
@@ -161,9 +113,65 @@
       this.Charthinf.Name = "Charthinf";
       this.Charthinf.Size = new System.Drawing.Size(2000, 550);
       this.Charthinf.TabIndex = 7;
-      this.Charthinf.Text = "Charthinf";
-
-
+      this.Charthinf.Text = "hinf Frequency Response";
+      // 
+      // ResultsText
+      // 
+      this.ResultsText.Location = new System.Drawing.Point(175, 50);
+      this.ResultsText.Name = "ResultsText";
+      this.ResultsText.Size = new System.Drawing.Size(1500, 1900);
+      this.ResultsText.TabIndex = 8;
+      this.ResultsText.Text = "Results Text";
+      // 
+      // LoadResults
+      // 
+      this.LoadResults.Location = new System.Drawing.Point(670, 1975);
+      this.LoadResults.Name = "LoadResults";
+      this.LoadResults.Size = new System.Drawing.Size(400, 50);
+      this.LoadResults.TabIndex = 9;
+      this.LoadResults.Text = "Load Results";
+      this.LoadResults.UseVisualStyleBackColor = true;
+      this.LoadResults.Click += new System.EventHandler(this.LoadResults_Click);
+      // 
+      // Run
+      // 
+      this.Run.Location = new System.Drawing.Point(29, 50);
+      this.Run.Name = "Run";
+      this.Run.Size = new System.Drawing.Size(125, 60);
+      this.Run.TabIndex = 10;
+      this.Run.Text = "Run";
+      this.Run.UseVisualStyleBackColor = true;
+      this.Run.Click += new System.EventHandler(this.Run_Click_1);
+      // 
+      // Quit
+      // 
+      this.Quit.Location = new System.Drawing.Point(29, 150);
+      this.Quit.Name = "Quit";
+      this.Quit.Size = new System.Drawing.Size(125, 60);
+      this.Quit.TabIndex = 11;
+      this.Quit.Text = "Quit";
+      this.Quit.UseVisualStyleBackColor = true;
+      this.Quit.Click += new System.EventHandler(this.Quit_Click);
+      // 
+      // ControlSystemDesign
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.AutoSize = true;
+      this.ClientSize = new System.Drawing.Size(3828, 2097);
+      this.Controls.Add(this.Quit);
+      this.Controls.Add(this.Run);
+      this.Controls.Add(this.LoadResults);
+      this.Controls.Add(this.ResultsText);
+      this.Controls.Add(this.Charthinf);
+      this.Controls.Add(this.Charth2);
+      this.Controls.Add(this.Plothinf);
+      this.Controls.Add(this.Ploth2);
+      this.Controls.Add(this.ChartPlant);
+      this.Controls.Add(this.PlotPlant);
+      this.Name = "ControlSystemDesign";
+      this.Text = "Control System Design";
+      this.Load += new System.EventHandler(this.ControlSystemDesign_Load);
       ((System.ComponentModel.ISupportInitialize)(this.ChartPlant)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charth2)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charthinf)).EndInit();
@@ -181,6 +189,7 @@
     private System.Windows.Forms.DataVisualization.Charting.Chart Charthinf;
     private System.Windows.Forms.RichTextBox ResultsText;
     private System.Windows.Forms.Button Run;
+    private System.Windows.Forms.Button Quit;
   }
 }
 

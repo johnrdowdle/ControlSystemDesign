@@ -301,7 +301,8 @@ namespace ControlSystemDesign
       int decmaxY = (int)Math.Log10(maxY) +  1;
 
       // load data and display on the chart
-
+      ChartPlant.Series.Clear();
+      ChartPlant.Titles.Clear();
       ChartPlant.Titles.Add("Open-Loop Plant");
       ChartPlant.ChartAreas[0].Name = "PlantFreqRsp";
       ChartPlant.ChartAreas[0].AxisX.IsLogarithmic = true;
@@ -331,11 +332,6 @@ namespace ControlSystemDesign
     }
 
     private void ResultsText_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void ChartPlant_Click(object sender, EventArgs e)
     {
 
     }
@@ -373,6 +369,8 @@ namespace ControlSystemDesign
       int decmaxY = (int)Math.Log10(maxY) +  1;
 
       // load data and display on the chart
+      Charth2.Series.Clear();
+      Charth2.Titles.Clear();
       Charth2.Titles.Add("Closed-Loop h2 Design");
       Charth2.ChartAreas[0].Name = "h2FreqRsp";
       Charth2.ChartAreas[0].AxisX.IsLogarithmic = true;
@@ -455,6 +453,8 @@ namespace ControlSystemDesign
       int decmaxY = (int)Math.Log10(maxY) +  1;
 
       // load data and display on the chart
+      Charthinf.Series.Clear();
+      Charthinf.Titles.Clear();
       Charthinf.Titles.Add("Closed-Loop h-infinity Design");
       Charthinf.ChartAreas[0].Name = "hinfFreqRsp";
       Charthinf.ChartAreas[0].AxisX.IsLogarithmic = true;
@@ -511,11 +511,6 @@ namespace ControlSystemDesign
       }
     }
 
-    private void Charth2_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private void ControlSystemDesign_Load(object sender, EventArgs e)
     {
       
@@ -540,6 +535,11 @@ namespace ControlSystemDesign
       p.StartInfo.CreateNoWindow = true;
       p.Start();
       p.WaitForExit();
+    }
+
+    private void Quit_Click(object sender, EventArgs e)
+    {
+      Application.Exit();
     }
   }
 }
