@@ -1,4 +1,15 @@
-﻿using System;
+﻿//=======================================================================================
+// module 'ControlSystemDesign'
+//
+// description:
+//  This module creates the actions in response to the interrupts from the module form.
+//
+// J R Dowdle
+// 06-Aug-2017
+//=======================================================================================
+
+// included namespaces
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,9 +22,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
+// program namespace
 namespace ControlSystemDesign
 {
-  public partial class ControlSystemDesign : Form
+  // beginning of module 'ControlSystemDesign'
+
+  //=====================================================================================
+  // class 'ControlSystemDesign:Form'
+  //
+  // description:
+  //  This class contains the data and methods for responding to the interrupts from
+  //  the form.
+  //
+  // J R Dowdle
+  // 06-Aug-2017
+  //=====================================================================================
+
+  // beginning of class 'ControlSystemDesign:Form'
+
+  public partial class ControlSystemDesign:Form
   {
 
     // set up global arrays
@@ -38,8 +65,22 @@ namespace ControlSystemDesign
     string FreqRspFileName = "freqrsp.dat";
     string ResultsFileName = "compensator.dat";
 
+    //=====================================================================================
+    // method 'unwinddata'
+    //
+    // description:
+    //  This method reads data from a file and loads it into arrays for plotting.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'unwinddata'
+
     private void unwinddata(ref int m)
     {
+      // executable code
+
       // open input stream
       string PlotFileName = ControlSystemParentFolder + "\\" + WorkingDataParentFolder + "\\" + DataFolder + "\\" + FreqRspFileName;
       string[] records = File.ReadAllLines(PlotFileName);
@@ -269,18 +310,50 @@ namespace ControlSystemDesign
       }
     }
 
+    //=====================================================================================
+    // end of method 'unwinddata'
+    //=====================================================================================
+
+    //=====================================================================================
+    // method 'ControlSystemDesign
+    //
+    // description:
+    //  This method initializes the form.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'ControlSystemDesign'
+
     public ControlSystemDesign()
     {
+      // executable code
+
       InitializeComponent();
     }
 
-    private void textBox1_TextChanged(object sender, EventArgs e)
-    {
+    //=====================================================================================
+    // end of method 'ControlSystemDesign'
+    //=====================================================================================
 
-    }
+    //=====================================================================================
+    // method 'PlotPlant_Click'
+    //
+    // description:
+    //  This method plots the plant open-loop frequency response in response to a user
+    //  request.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'PlotPlant_Click'
 
     private void PlotPlant_Click(object sender, EventArgs e)
     {
+      // executable code
+
       // invoke unwinddata
       int m = 0;
       unwinddata(ref m);
@@ -312,32 +385,41 @@ namespace ControlSystemDesign
       ChartPlant.ChartAreas[0].AxisY.Minimum = Math.Pow(10, decminY);
       ChartPlant.ChartAreas[0].AxisY.Maximum = Math.Pow(10, decmaxY);
 
-      ChartPlant.Series.Add("minimum singular value");
-      ChartPlant.Series["minimum singular value"].ChartType = SeriesChartType.Line;
-      ChartPlant.Series["minimum singular value"].ChartArea = "PlantFreqRsp";
+      ChartPlant.Series.Add("minimum response");
+      ChartPlant.Series["minimum response"].ChartType = SeriesChartType.Line;
+      ChartPlant.Series["minimum response"].ChartArea = "PlantFreqRsp";
 
-      ChartPlant.Series.Add("maximum singular value");
-      ChartPlant.Series["maximum singular value"].ChartType = SeriesChartType.Line;
-      ChartPlant.Series["maximum singular value"].ChartArea = "PlantFreqRsp";
+      ChartPlant.Series.Add("maximum response");
+      ChartPlant.Series["maximum response"].ChartType = SeriesChartType.Line;
+      ChartPlant.Series["maximum response"].ChartArea = "PlantFreqRsp";
       for (int i = 0; i < (m - 1); i++)
       {
-        ChartPlant.Series["minimum singular value"].Points.AddXY(w.GetValue(i), svminP.GetValue(i));
-        ChartPlant.Series["maximum singular value"].Points.AddXY(w.GetValue(i), svmaxP.GetValue(i));
+        ChartPlant.Series["minimum response"].Points.AddXY(w.GetValue(i), svminP.GetValue(i));
+        ChartPlant.Series["maximum response"].Points.AddXY(w.GetValue(i), svmaxP.GetValue(i));
       }
     }
 
-    private void textBox1_TextChanged_1(object sender, EventArgs e)
-    {
+    //=====================================================================================
+    // end of method 'PlotPlant_Click'
+    //=====================================================================================
 
-    }
+    //=====================================================================================
+    // method 'Ploth2_Click'
+    //
+    // description:
+    //  This method plots the h2-optimal closed-loop frequency response in response to a 
+    //  user request.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
 
-    private void ResultsText_TextChanged(object sender, EventArgs e)
-    {
-
-    }
+    // beginning of method 'Ploth2_Click'
 
     private void Ploth2_Click(object sender, EventArgs e)
     {
+      // executable code
+
       // invoke unwinddata
       int m = 0;
       unwinddata(ref m);
@@ -380,55 +462,74 @@ namespace ControlSystemDesign
       Charth2.ChartAreas[0].AxisY.Minimum = Math.Pow(10, decminY);
       Charth2.ChartAreas[0].AxisY.Maximum = Math.Pow(10, decmaxY);
 
-      Charth2.Series.Add("minimum singular value (z/w)");
-      Charth2.Series["minimum singular value (z/w)"].ChartType = SeriesChartType.Line;
-      Charth2.Series["minimum singular value (z/w)"].ChartArea = "h2FreqRsp";
-      Charth2.Series["minimum singular value (z/w)"].Color = Color.Red;
-      Charth2.Series["minimum singular value (z/w)"].BorderDashStyle = ChartDashStyle.Dash;
+      Charth2.Series.Add("minimum response (z/w)");
+      Charth2.Series["minimum response (z/w)"].ChartType = SeriesChartType.Line;
+      Charth2.Series["minimum response (z/w)"].ChartArea = "h2FreqRsp";
+      Charth2.Series["minimum response (z/w)"].Color = Color.Red;
+      Charth2.Series["minimum response (z/w)"].BorderDashStyle = ChartDashStyle.Dash;
 
-      Charth2.Series.Add("maximum singular value (z/w)");
-      Charth2.Series["maximum singular value (z/w)"].ChartType = SeriesChartType.Line;
-      Charth2.Series["maximum singular value (z/w)"].ChartArea = "h2FreqRsp";
-      Charth2.Series["maximum singular value (z/w)"].Color = Color.Red;
-      Charth2.Series["maximum singular value (z/w)"].BorderDashStyle = ChartDashStyle.Solid;
+      Charth2.Series.Add("maximum response (z/w)");
+      Charth2.Series["maximum response (z/w)"].ChartType = SeriesChartType.Line;
+      Charth2.Series["maximum response (z/w)"].ChartArea = "h2FreqRsp";
+      Charth2.Series["maximum response (z/w)"].Color = Color.Red;
+      Charth2.Series["maximum response (z/w)"].BorderDashStyle = ChartDashStyle.Solid;
 
-      Charth2.Series.Add("minimum singular value (y/w)");
-      Charth2.Series["minimum singular value (y/w)"].ChartType = SeriesChartType.Line;
-      Charth2.Series["minimum singular value (y/w)"].ChartArea = "h2FreqRsp";
-      Charth2.Series["minimum singular value (y/w)"].Color = Color.Blue;
-      Charth2.Series["minimum singular value (y/w)"].BorderDashStyle = ChartDashStyle.Dash;
+      Charth2.Series.Add("minimum response (y/w)");
+      Charth2.Series["minimum response (y/w)"].ChartType = SeriesChartType.Line;
+      Charth2.Series["minimum response (y/w)"].ChartArea = "h2FreqRsp";
+      Charth2.Series["minimum response (y/w)"].Color = Color.Blue;
+      Charth2.Series["minimum response (y/w)"].BorderDashStyle = ChartDashStyle.Dash;
 
-      Charth2.Series.Add("maximum singular value (y/w)");
-      Charth2.Series["maximum singular value (y/w)"].ChartType = SeriesChartType.Line;
-      Charth2.Series["maximum singular value (y/w)"].ChartArea = "h2FreqRsp";
-      Charth2.Series["maximum singular value (y/w)"].Color = Color.Blue;
-      Charth2.Series["maximum singular value (y/w)"].BorderDashStyle = ChartDashStyle.Solid;
+      Charth2.Series.Add("maximum response (y/w)");
+      Charth2.Series["maximum response (y/w)"].ChartType = SeriesChartType.Line;
+      Charth2.Series["maximum response (y/w)"].ChartArea = "h2FreqRsp";
+      Charth2.Series["maximum response (y/w)"].Color = Color.Blue;
+      Charth2.Series["maximum response (y/w)"].BorderDashStyle = ChartDashStyle.Solid;
 
-      Charth2.Series.Add("minimum singular value (u/w)");
-      Charth2.Series["minimum singular value (u/w)"].ChartType = SeriesChartType.Line;
-      Charth2.Series["minimum singular value (u/w)"].ChartArea = "h2FreqRsp";
-      Charth2.Series["minimum singular value (u/w)"].Color = Color.Cyan;
-      Charth2.Series["minimum singular value (u/w)"].BorderDashStyle = ChartDashStyle.Dash;
+      Charth2.Series.Add("minimum response (u/w)");
+      Charth2.Series["minimum response (u/w)"].ChartType = SeriesChartType.Line;
+      Charth2.Series["minimum response (u/w)"].ChartArea = "h2FreqRsp";
+      Charth2.Series["minimum response (u/w)"].Color = Color.Cyan;
+      Charth2.Series["minimum response (u/w)"].BorderDashStyle = ChartDashStyle.Dash;
 
-      Charth2.Series.Add("maximum singular value (u/w)");
-      Charth2.Series["maximum singular value (u/w)"].ChartType = SeriesChartType.Line;
-      Charth2.Series["maximum singular value (u/w)"].ChartArea = "h2FreqRsp";
-      Charth2.Series["maximum singular value (u/w)"].Color = Color.Cyan;
-      Charth2.Series["maximum singular value (u/w)"].BorderDashStyle = ChartDashStyle.Solid;
+      Charth2.Series.Add("maximum response (u/w)");
+      Charth2.Series["maximum response (u/w)"].ChartType = SeriesChartType.Line;
+      Charth2.Series["maximum response (u/w)"].ChartArea = "h2FreqRsp";
+      Charth2.Series["maximum response (u/w)"].Color = Color.Cyan;
+      Charth2.Series["maximum response (u/w)"].BorderDashStyle = ChartDashStyle.Solid;
 
       for (int i = 0; i < (m - 1); i++)
       {
-        Charth2.Series["minimum singular value (z/w)"].Points.AddXY(w.GetValue(i), svminCLh2wz.GetValue(i));
-        Charth2.Series["maximum singular value (z/w)"].Points.AddXY(w.GetValue(i), svmaxCLh2wz.GetValue(i));
-        Charth2.Series["minimum singular value (y/w)"].Points.AddXY(w.GetValue(i), svminCLh2wy.GetValue(i));
-        Charth2.Series["maximum singular value (y/w)"].Points.AddXY(w.GetValue(i), svmaxCLh2wy.GetValue(i));
-        Charth2.Series["minimum singular value (u/w)"].Points.AddXY(w.GetValue(i), svminCLh2wu.GetValue(i));
-        Charth2.Series["maximum singular value (u/w)"].Points.AddXY(w.GetValue(i), svmaxCLh2wu.GetValue(i));
+        Charth2.Series["minimum response (z/w)"].Points.AddXY(w.GetValue(i), svminCLh2wz.GetValue(i));
+        Charth2.Series["maximum response (z/w)"].Points.AddXY(w.GetValue(i), svmaxCLh2wz.GetValue(i));
+        Charth2.Series["minimum response (y/w)"].Points.AddXY(w.GetValue(i), svminCLh2wy.GetValue(i));
+        Charth2.Series["maximum response (y/w)"].Points.AddXY(w.GetValue(i), svmaxCLh2wy.GetValue(i));
+        Charth2.Series["minimum response (u/w)"].Points.AddXY(w.GetValue(i), svminCLh2wu.GetValue(i));
+        Charth2.Series["maximum response (u/w)"].Points.AddXY(w.GetValue(i), svmaxCLh2wu.GetValue(i));
       }
     }
 
+    //=====================================================================================
+    // end of method 'Ploth2_Click'
+    //=====================================================================================
+
+    //=====================================================================================
+    // method 'Plothinf_Click'
+    //
+    // description:
+    //  This method plots the h-infinity closed-loop frequency response in response to a 
+    //  user request.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'Plothinf_Click'
+
     private void Plothinf_Click(object sender, EventArgs e)
     {
+      // executable code
+
       // invoke unwinddata
       int m = 0;
       unwinddata(ref m);
@@ -464,82 +565,147 @@ namespace ControlSystemDesign
       Charthinf.ChartAreas[0].AxisY.Minimum = Math.Pow(10, decminY);
       Charthinf.ChartAreas[0].AxisY.Maximum = Math.Pow(10, decmaxY);
 
-      Charthinf.Series.Add("minimum singular value (z/w)");
-      Charthinf.Series["minimum singular value (z/w)"].ChartType = SeriesChartType.Line;
-      Charthinf.Series["minimum singular value (z/w)"].ChartArea = "hinfFreqRsp";
-      Charthinf.Series["minimum singular value (z/w)"].Color = Color.Red;
-      Charthinf.Series["minimum singular value (z/w)"].BorderDashStyle = ChartDashStyle.Dash;
+      Charthinf.Series.Add("minimum response (z/w)");
+      Charthinf.Series["minimum response (z/w)"].ChartType = SeriesChartType.Line;
+      Charthinf.Series["minimum response (z/w)"].ChartArea = "hinfFreqRsp";
+      Charthinf.Series["minimum response (z/w)"].Color = Color.Red;
+      Charthinf.Series["minimum response (z/w)"].BorderDashStyle = ChartDashStyle.Dash;
 
-      Charthinf.Series.Add("maximum singular value (z/w)");
-      Charthinf.Series["maximum singular value (z/w)"].ChartType = SeriesChartType.Line;
-      Charthinf.Series["maximum singular value (z/w)"].ChartArea = "hinfFreqRsp";
-      Charthinf.Series["maximum singular value (z/w)"].Color = Color.Red;
-      Charthinf.Series["maximum singular value (z/w)"].BorderDashStyle = ChartDashStyle.Solid;
+      Charthinf.Series.Add("maximum response (z/w)");
+      Charthinf.Series["maximum response (z/w)"].ChartType = SeriesChartType.Line;
+      Charthinf.Series["maximum response (z/w)"].ChartArea = "hinfFreqRsp";
+      Charthinf.Series["maximum response (z/w)"].Color = Color.Red;
+      Charthinf.Series["maximum response (z/w)"].BorderDashStyle = ChartDashStyle.Solid;
 
-      Charthinf.Series.Add("minimum singular value (y/w)");
-      Charthinf.Series["minimum singular value (y/w)"].ChartType = SeriesChartType.Line;
-      Charthinf.Series["minimum singular value (y/w)"].ChartArea = "hinfFreqRsp";
-      Charthinf.Series["minimum singular value (y/w)"].Color = Color.Blue;
-      Charthinf.Series["minimum singular value (y/w)"].BorderDashStyle = ChartDashStyle.Dash;
+      Charthinf.Series.Add("minimum response (y/w)");
+      Charthinf.Series["minimum response (y/w)"].ChartType = SeriesChartType.Line;
+      Charthinf.Series["minimum response (y/w)"].ChartArea = "hinfFreqRsp";
+      Charthinf.Series["minimum response (y/w)"].Color = Color.Blue;
+      Charthinf.Series["minimum response (y/w)"].BorderDashStyle = ChartDashStyle.Dash;
 
-      Charthinf.Series.Add("maximum singular value (y/w)");
-      Charthinf.Series["maximum singular value (y/w)"].ChartType = SeriesChartType.Line;
-      Charthinf.Series["maximum singular value (y/w)"].ChartArea = "hinfFreqRsp";
-      Charthinf.Series["maximum singular value (y/w)"].Color = Color.Blue;
-      Charthinf.Series["maximum singular value (y/w)"].BorderDashStyle = ChartDashStyle.Solid;
+      Charthinf.Series.Add("maximum response (y/w)");
+      Charthinf.Series["maximum response (y/w)"].ChartType = SeriesChartType.Line;
+      Charthinf.Series["maximum response (y/w)"].ChartArea = "hinfFreqRsp";
+      Charthinf.Series["maximum response (y/w)"].Color = Color.Blue;
+      Charthinf.Series["maximum response (y/w)"].BorderDashStyle = ChartDashStyle.Solid;
 
-      Charthinf.Series.Add("minimum singular value (u/w)");
-      Charthinf.Series["minimum singular value (u/w)"].ChartType = SeriesChartType.Line;
-      Charthinf.Series["minimum singular value (u/w)"].ChartArea = "hinfFreqRsp";
-      Charthinf.Series["minimum singular value (u/w)"].Color = Color.Cyan;
-      Charthinf.Series["minimum singular value (u/w)"].BorderDashStyle = ChartDashStyle.Dash;
+      Charthinf.Series.Add("minimum response (u/w)");
+      Charthinf.Series["minimum response (u/w)"].ChartType = SeriesChartType.Line;
+      Charthinf.Series["minimum response (u/w)"].ChartArea = "hinfFreqRsp";
+      Charthinf.Series["minimum response (u/w)"].Color = Color.Cyan;
+      Charthinf.Series["minimum response (u/w)"].BorderDashStyle = ChartDashStyle.Dash;
 
-      Charthinf.Series.Add("maximum singular value (u/w)");
-      Charthinf.Series["maximum singular value (u/w)"].ChartType = SeriesChartType.Line;
-      Charthinf.Series["maximum singular value (u/w)"].ChartArea = "hinfFreqRsp";
-      Charthinf.Series["maximum singular value (u/w)"].Color = Color.Cyan;
-      Charthinf.Series["maximum singular value (u/w)"].BorderDashStyle = ChartDashStyle.Solid;
+      Charthinf.Series.Add("maximum response (u/w)");
+      Charthinf.Series["maximum response (u/w)"].ChartType = SeriesChartType.Line;
+      Charthinf.Series["maximum response (u/w)"].ChartArea = "hinfFreqRsp";
+      Charthinf.Series["maximum response (u/w)"].Color = Color.Cyan;
+      Charthinf.Series["maximum response (u/w)"].BorderDashStyle = ChartDashStyle.Solid;
 
       for (int i = 0; i < (m - 1); i++)
       {
-        Charthinf.Series["minimum singular value (z/w)"].Points.AddXY(w.GetValue(i), svminCLhinfwz.GetValue(i));
-        Charthinf.Series["maximum singular value (z/w)"].Points.AddXY(w.GetValue(i), svmaxCLhinfwz.GetValue(i));
-        Charthinf.Series["minimum singular value (y/w)"].Points.AddXY(w.GetValue(i), svminCLhinfwy.GetValue(i));
-        Charthinf.Series["maximum singular value (y/w)"].Points.AddXY(w.GetValue(i), svmaxCLhinfwy.GetValue(i));
-        Charthinf.Series["minimum singular value (u/w)"].Points.AddXY(w.GetValue(i), svminCLhinfwu.GetValue(i));
-        Charthinf.Series["maximum singular value (u/w)"].Points.AddXY(w.GetValue(i), svmaxCLhinfwu.GetValue(i));
+        Charthinf.Series["minimum response (z/w)"].Points.AddXY(w.GetValue(i), svminCLhinfwz.GetValue(i));
+        Charthinf.Series["maximum response (z/w)"].Points.AddXY(w.GetValue(i), svmaxCLhinfwz.GetValue(i));
+        Charthinf.Series["minimum response (y/w)"].Points.AddXY(w.GetValue(i), svminCLhinfwy.GetValue(i));
+        Charthinf.Series["maximum response (y/w)"].Points.AddXY(w.GetValue(i), svmaxCLhinfwy.GetValue(i));
+        Charthinf.Series["minimum response (u/w)"].Points.AddXY(w.GetValue(i), svminCLhinfwu.GetValue(i));
+        Charthinf.Series["maximum response (u/w)"].Points.AddXY(w.GetValue(i), svmaxCLhinfwu.GetValue(i));
       }
     }
 
-    private void ControlSystemDesign_Load(object sender, EventArgs e)
-    {
-      
+    //=====================================================================================
+    // end of method 'Plothinf_Click'
+    //=====================================================================================
 
-    }
+    //=====================================================================================
+    // method 'LoadResults_Click'
+    //
+    // description:
+    //  This method loads the compensator results data file into the results text window
+    //  in response to a user request.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'LoadResults_Click'
 
     private void LoadResults_Click(object sender, EventArgs e)
     {
+      // executable code
+
+      // load the data into the results window
       string TextFileName = ControlSystemParentFolder + "\\" + WorkingDataParentFolder + "\\" + DataFolder + "\\" + ResultsFileName;
       ResultsText.Text = File.ReadAllText(TextFileName);
     }
 
-    private void Run_Click(object sender, EventArgs e)
-    {
-    }
+    //=====================================================================================
+    // end of method 'LoadResults_Click'
+    //=====================================================================================
+
+    //=====================================================================================
+    // method 'Run_Click_1'
+    //
+    // description:
+    //  This method runs the control system design algorithms in response to a user 
+    //  request.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'Run_Click_1'
 
     private void Run_Click_1(object sender, EventArgs e)
     {
+      // executable code
+
+      // spawn a process to run the control system design code
       Process p = new Process();
       p.StartInfo.UseShellExecute = false;
       p.StartInfo.FileName = "U:\\John\\Documents\\Software Projects\\MatrixSolutions\\x64\\Release\\ControlSystemClients.exe";
       p.StartInfo.CreateNoWindow = true;
       p.Start();
       p.WaitForExit();
+
+      // load the data into the results window
+      string TextFileName = ControlSystemParentFolder + "\\" + WorkingDataParentFolder + "\\" + DataFolder + "\\" + ResultsFileName;
+      ResultsText.Text = File.ReadAllText(TextFileName);
     }
+
+    //=====================================================================================
+    // end of method 'Run_Click_1'
+    //=====================================================================================
+
+    //=====================================================================================
+    // method 'Quit_Click'
+    //
+    // description:
+    //  This method exits the application in response to a user request.
+    //
+    // J R Dowdle
+    // 06-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'Quit_Click'
 
     private void Quit_Click(object sender, EventArgs e)
     {
+      // executable code
+
+      // exit application
       Application.Exit();
     }
+
+    //=====================================================================================
+    // end of method 'Quit_Click'
+    //=====================================================================================
   }
+
+  //=====================================================================================
+  // end of class 'ControlSystemDesign:Form'
+  //=====================================================================================
 }
+
+//=======================================================================================
+// end of module 'ControlSystemDesign'
+//=======================================================================================
