@@ -9,6 +9,7 @@
 //=======================================================================================
 
 // included namespaces
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -59,11 +60,13 @@ namespace ControlSystemDesign
     Array svmaxCLhinfwy = Array.CreateInstance(typeof(double), 1000);
     Array svminCLhinfwu = Array.CreateInstance(typeof(double), 1000);
     Array svmaxCLhinfwu = Array.CreateInstance(typeof(double), 1000);
-    string ControlSystemParentFolder = @"U:\\John\Documents\\Software Projects";
-    string WorkingDataParentFolder = "Data";
-    string DataFolder = "Example1";
+
+    // set paths and file names
     string FreqRspFileName = "freqrsp.dat";
     string ResultsFileName = "compensator.dat";
+    string InputDataFileName = "U:\\John\\Documents\\Software Projects\\Data\\Example1\\input.dat";
+    string InputDataFilePath = "U:\\John\\Documents\\Software Projects\\Dat\\Example1";
+    string OutputDataPath = "U:\\John\\Documents\\Software Projects\\Data\\Example1";
 
     //=====================================================================================
     // method 'unwinddata'
@@ -82,7 +85,7 @@ namespace ControlSystemDesign
       // executable code
 
       // open input stream
-      string PlotFileName = ControlSystemParentFolder + "\\" + WorkingDataParentFolder + "\\" + DataFolder + "\\" + FreqRspFileName;
+      string PlotFileName = OutputDataPath + "\\" + FreqRspFileName;
       string[] records = File.ReadAllLines(PlotFileName);
       int n = records.Length;
 
@@ -634,7 +637,7 @@ namespace ControlSystemDesign
       // executable code
 
       // load the data into the results window
-      string TextFileName = ControlSystemParentFolder + "\\" + WorkingDataParentFolder + "\\" + DataFolder + "\\" + ResultsFileName;
+      string TextFileName = OutputDataPath + "\\" + ResultsFileName;
       ResultsText.Text = File.ReadAllText(TextFileName);
     }
 
@@ -663,12 +666,13 @@ namespace ControlSystemDesign
       Process p = new Process();
       p.StartInfo.UseShellExecute = false;
       p.StartInfo.FileName = "U:\\John\\Documents\\Software Projects\\MatrixSolutions\\x64\\Release\\ControlSystemClients.exe";
-      p.StartInfo.CreateNoWindow = true;
+      p.StartInfo.Arguments = "\"" + InputDataFileName + "\"" + " " + "\"" + OutputDataPath + "\"";
+      p.StartInfo.CreateNoWindow = false;
       p.Start();
       p.WaitForExit();
 
       // load the data into the results window
-      string TextFileName = ControlSystemParentFolder + "\\" + WorkingDataParentFolder + "\\" + DataFolder + "\\" + ResultsFileName;
+      string TextFileName = OutputDataPath + "\\" + ResultsFileName;
       ResultsText.Text = File.ReadAllText(TextFileName);
     }
 
@@ -699,6 +703,58 @@ namespace ControlSystemDesign
     //=====================================================================================
     // end of method 'Quit_Click'
     //=====================================================================================
+
+    //=====================================================================================
+    // method 'SelectInputFile_Click'
+    //
+    // description:
+    //  This method ...
+    //
+    // J R Dowdle
+    // 07-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'SelectInputFile_Click'
+
+    private void SelectInputFile_Click(object sender, EventArgs e)
+    {
+      // executable code
+
+      // open file dialog box
+      OpenFileDialog ofd = new OpenFileDialog();
+      ofd.Title = "Find input data file";
+      ofd.InitialDirectory = @"C:\";
+      ofd.RestoreDirectory = true;
+
+      // if everything worked ok, get file name and load file into text box
+      if (ofd.ShowDialog() == DialogResult.OK)
+      {
+        // load the data into the results window
+        FileInfo file = new FileInfo(ofd.FileName);
+        InputDataFileName = file.FullName;
+        InputDataFilePath = Path.GetDirectoryName(InputDataFileName);
+        ResultsText.Text = File.ReadAllText(InputDataFileName);
+      }
+    }
+
+    //=====================================================================================
+    // end of method 'SelectInputFile_Click'
+    //=====================================================================================
+
+    private void SelectOutputFolder_Click(object sender, EventArgs e)
+    {
+      // executable code
+
+      // open file dialog box
+      FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+      // if everything worked ok, get folder path name
+      if (fbd.ShowDialog() == DialogResult.OK)
+      {
+        // get folder path name
+        OutputDataPath = fbd.SelectedPath;
+      }
+    }
   }
 
   //=====================================================================================
