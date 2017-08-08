@@ -5,6 +5,7 @@
 //  This module creates the actions in response to the interrupts from the module form.
 //
 // J R Dowdle
+// 1.0.0.0
 // 06-Aug-2017
 //=======================================================================================
 
@@ -41,7 +42,7 @@ namespace ControlSystemDesign
 
   // beginning of class 'ControlSystemDesign:Form'
 
-  public partial class ControlSystemDesign:Form
+  public partial class ControlSystemDesign : Form
   {
 
     // set up global arrays
@@ -62,11 +63,10 @@ namespace ControlSystemDesign
     Array svmaxCLhinfwu = Array.CreateInstance(typeof(double), 1000);
 
     // set paths and file names
+    string InputDataFileName = "";
+    string OutputDataPath = "";
     string FreqRspFileName = "freqrsp.dat";
     string ResultsFileName = "compensator.dat";
-    string InputDataFileName = "U:\\John\\Documents\\Software Projects\\Data\\Example1\\input.dat";
-    string InputDataFilePath = "U:\\John\\Documents\\Software Projects\\Dat\\Example1";
-    string OutputDataPath = "U:\\John\\Documents\\Software Projects\\Data\\Example1";
 
     //=====================================================================================
     // method 'unwinddata'
@@ -361,6 +361,21 @@ namespace ControlSystemDesign
       int m = 0;
       unwinddata(ref m);
 
+      // compute the min/max values for the horizontal axis
+      double minX, maxX;
+      minX = Math.Pow(2, 52);
+      maxX = Math.Pow(2, -52);
+      for (int i = 0; i < (m - 1); i++)
+      {
+        // set minimum value for X axis
+        minX = Math.Min(minX, Convert.ToDouble(w.GetValue(i)));
+        // set maximum value for X axis
+        maxX = Math.Max(maxX, Convert.ToDouble(w.GetValue(i)));
+      }
+      // find closest decades to minX and maxX
+      int decminX = (int)Math.Log10(minX);
+      int decmaxX = (int)Math.Log10(maxX);
+
       // compute the min/max values for the vertical axis
       double minY, maxY;
       minY = Math.Pow(2, 52);
@@ -385,6 +400,8 @@ namespace ControlSystemDesign
       ChartPlant.ChartAreas[0].AxisY.IsLogarithmic = true;
       ChartPlant.ChartAreas[0].AxisX.Title = "Frequency [r/s]";
       ChartPlant.ChartAreas[0].AxisY.Title = "Magnitude";
+      ChartPlant.ChartAreas[0].AxisX.Minimum = Math.Pow(10, decminX);
+      ChartPlant.ChartAreas[0].AxisX.Maximum = Math.Pow(10, decmaxX);
       ChartPlant.ChartAreas[0].AxisY.Minimum = Math.Pow(10, decminY);
       ChartPlant.ChartAreas[0].AxisY.Maximum = Math.Pow(10, decmaxY);
 
@@ -427,6 +444,21 @@ namespace ControlSystemDesign
       int m = 0;
       unwinddata(ref m);
 
+      // compute the min/max values for the horizontal axis
+      double minX, maxX;
+      minX = Math.Pow(2, 52);
+      maxX = Math.Pow(2, -52);
+      for (int i = 0; i < (m - 1); i++)
+      {
+        // set minimum value for X axis
+        minX = Math.Min(minX, Convert.ToDouble(w.GetValue(i)));
+        // set maximum value for X axis
+        maxX = Math.Max(maxX, Convert.ToDouble(w.GetValue(i)));
+      }
+      // find closest decades to minX and maxX
+      int decminX = (int)Math.Log10(minX);
+      int decmaxX = (int)Math.Log10(maxX);
+
       // compute the min/max values for the vertical axis
       double minY, maxY;
       minY = Math.Pow(2, 52);
@@ -462,6 +494,8 @@ namespace ControlSystemDesign
       Charth2.ChartAreas[0].AxisY.IsLogarithmic = true;
       Charth2.ChartAreas[0].AxisX.Title = "Frequency [r/s]";
       Charth2.ChartAreas[0].AxisY.Title = "Magnitude";
+      Charth2.ChartAreas[0].AxisX.Minimum = Math.Pow(10, decminX);
+      Charth2.ChartAreas[0].AxisX.Maximum = Math.Pow(10, decmaxX);
       Charth2.ChartAreas[0].AxisY.Minimum = Math.Pow(10, decminY);
       Charth2.ChartAreas[0].AxisY.Maximum = Math.Pow(10, decmaxY);
 
@@ -537,6 +571,21 @@ namespace ControlSystemDesign
       int m = 0;
       unwinddata(ref m);
 
+      // compute the min/max values for the horizontal axis
+      double minX, maxX;
+      minX = Math.Pow(2, 52);
+      maxX = Math.Pow(2, -52);
+      for (int i = 0; i < (m - 1); i++)
+      {
+        // set minimum value for X axis
+        minX = Math.Min(minX, Convert.ToDouble(w.GetValue(i)));
+        // set maximum value for X axis
+        maxX = Math.Max(maxX, Convert.ToDouble(w.GetValue(i)));
+      }
+      // find closest decades to minX and maxX
+      int decminX = (int)Math.Log10(minX);
+      int decmaxX = (int)Math.Log10(maxX);
+
       // compute the min/max values for the vertical axis
       double minY, maxY;
       minY = Math.Pow(2, 52);
@@ -565,6 +614,8 @@ namespace ControlSystemDesign
       Charthinf.ChartAreas[0].AxisY.IsLogarithmic = true;
       Charthinf.ChartAreas[0].AxisX.Title = "Frequency [r/s]";
       Charthinf.ChartAreas[0].AxisY.Title = "Magnitude";
+      Charthinf.ChartAreas[0].AxisX.Minimum = Math.Pow(10, decminX);
+      Charthinf.ChartAreas[0].AxisX.Maximum = Math.Pow(10, decmaxX);
       Charthinf.ChartAreas[0].AxisY.Minimum = Math.Pow(10, decminY);
       Charthinf.ChartAreas[0].AxisY.Maximum = Math.Pow(10, decmaxY);
 
@@ -708,7 +759,7 @@ namespace ControlSystemDesign
     // method 'SelectInputFile_Click'
     //
     // description:
-    //  This method ...
+    //  This method selects the input data file in response to a user request.
     //
     // J R Dowdle
     // 07-Aug-2017
@@ -732,7 +783,6 @@ namespace ControlSystemDesign
         // load the data into the results window
         FileInfo file = new FileInfo(ofd.FileName);
         InputDataFileName = file.FullName;
-        InputDataFilePath = Path.GetDirectoryName(InputDataFileName);
         ResultsText.Text = File.ReadAllText(InputDataFileName);
       }
     }
@@ -740,6 +790,18 @@ namespace ControlSystemDesign
     //=====================================================================================
     // end of method 'SelectInputFile_Click'
     //=====================================================================================
+
+    //=====================================================================================
+    // method 'SelectOutputFolder_Click'
+    //
+    // description:
+    //  This method selects the output data folder in response to a user request.
+    //
+    // J R Dowdle
+    // 07-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'SelectOutputFolder_Click'
 
     private void SelectOutputFolder_Click(object sender, EventArgs e)
     {
@@ -755,8 +817,34 @@ namespace ControlSystemDesign
         OutputDataPath = fbd.SelectedPath;
       }
     }
-  }
 
+    //=====================================================================================
+    // end of method 'SelectOutputFolder_Click'
+    //=====================================================================================
+
+    //=====================================================================================
+    // method 'EditInputFile_Click'
+    //
+    // description:
+    //  This method saves the input data file following editing in response to a user 
+    //  request.
+    //
+    // J R Dowdle
+    // 07-Aug-2017
+    //=====================================================================================
+
+    // beginning of method 'EditInputFile_Click'
+
+    private void EditInputFile_Click(object sender, EventArgs e)
+    {
+      File.WriteAllText(InputDataFileName, ResultsText.Text);
+    }
+
+    //=====================================================================================
+    // end of method 'EditInputFile_Click'
+    //=====================================================================================
+
+  }
   //=====================================================================================
   // end of class 'ControlSystemDesign:Form'
   //=====================================================================================

@@ -28,12 +28,12 @@
     /// </summary>
     private void InitializeComponent()
     {
-      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-      System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-      System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-      System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+      System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+      System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+      System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+      System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
       this.Run = new System.Windows.Forms.Button();
       this.Quit = new System.Windows.Forms.Button();
       this.LoadResults = new System.Windows.Forms.Button();
@@ -43,9 +43,10 @@
       this.ChartPlant = new System.Windows.Forms.DataVisualization.Charting.Chart();
       this.Charth2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
       this.Charthinf = new System.Windows.Forms.DataVisualization.Charting.Chart();
-      this.ResultsText = new System.Windows.Forms.RichTextBox();
       this.SelectInputFile = new System.Windows.Forms.Button();
       this.SelectOutputFolder = new System.Windows.Forms.Button();
+      this.ResultsText = new System.Windows.Forms.TextBox();
+      this.SaveInputFile = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.ChartPlant)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charth2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charthinf)).BeginInit();
@@ -53,7 +54,7 @@
       // 
       // Run
       // 
-      this.Run.Location = new System.Drawing.Point(105, 250);
+      this.Run.Location = new System.Drawing.Point(105, 350);
       this.Run.Name = "Run";
       this.Run.Size = new System.Drawing.Size(125, 60);
       this.Run.TabIndex = 10;
@@ -63,7 +64,7 @@
       // 
       // Quit
       // 
-      this.Quit.Location = new System.Drawing.Point(105, 350);
+      this.Quit.Location = new System.Drawing.Point(105, 450);
       this.Quit.Name = "Quit";
       this.Quit.Size = new System.Drawing.Size(125, 60);
       this.Quit.TabIndex = 11;
@@ -73,7 +74,7 @@
       // 
       // LoadResults
       // 
-      this.LoadResults.Location = new System.Drawing.Point(670, 1975);
+      this.LoadResults.Location = new System.Drawing.Point(825, 1975);
       this.LoadResults.Name = "LoadResults";
       this.LoadResults.Size = new System.Drawing.Size(400, 50);
       this.LoadResults.TabIndex = 9;
@@ -113,10 +114,10 @@
       // 
       // ChartPlant
       // 
-      chartArea4.Name = "PlantFreqRsp";
-      this.ChartPlant.ChartAreas.Add(chartArea4);
-      legend4.Name = "Legend1";
-      this.ChartPlant.Legends.Add(legend4);
+      chartArea1.Name = "PlantFreqRsp";
+      this.ChartPlant.ChartAreas.Add(chartArea1);
+      legend1.Name = "Legend1";
+      this.ChartPlant.Legends.Add(legend1);
       this.ChartPlant.Location = new System.Drawing.Point(1750, 50);
       this.ChartPlant.Name = "ChartPlant";
       this.ChartPlant.Size = new System.Drawing.Size(2000, 550);
@@ -125,10 +126,10 @@
       // 
       // Charth2
       // 
-      chartArea5.Name = "h2FreqRsp";
-      this.Charth2.ChartAreas.Add(chartArea5);
-      legend5.Name = "Legend1";
-      this.Charth2.Legends.Add(legend5);
+      chartArea2.Name = "h2FreqRsp";
+      this.Charth2.ChartAreas.Add(chartArea2);
+      legend2.Name = "Legend1";
+      this.Charth2.Legends.Add(legend2);
       this.Charth2.Location = new System.Drawing.Point(1750, 725);
       this.Charth2.Name = "Charth2";
       this.Charth2.Size = new System.Drawing.Size(2000, 550);
@@ -137,23 +138,15 @@
       // 
       // Charthinf
       // 
-      chartArea6.Name = "hinfFreqRsp";
-      this.Charthinf.ChartAreas.Add(chartArea6);
-      legend6.Name = "Legend1";
-      this.Charthinf.Legends.Add(legend6);
+      chartArea3.Name = "hinfFreqRsp";
+      this.Charthinf.ChartAreas.Add(chartArea3);
+      legend3.Name = "Legend1";
+      this.Charthinf.Legends.Add(legend3);
       this.Charthinf.Location = new System.Drawing.Point(1750, 1400);
       this.Charthinf.Name = "Charthinf";
       this.Charthinf.Size = new System.Drawing.Size(2000, 550);
       this.Charthinf.TabIndex = 7;
       this.Charthinf.Text = "hinf Frequency Response";
-      // 
-      // ResultsText
-      // 
-      this.ResultsText.Location = new System.Drawing.Point(423, 50);
-      this.ResultsText.Name = "ResultsText";
-      this.ResultsText.Size = new System.Drawing.Size(1234, 1900);
-      this.ResultsText.TabIndex = 8;
-      this.ResultsText.Text = "";
       // 
       // SelectInputFile
       // 
@@ -167,7 +160,7 @@
       // 
       // SelectOutputFolder
       // 
-      this.SelectOutputFolder.Location = new System.Drawing.Point(30, 150);
+      this.SelectOutputFolder.Location = new System.Drawing.Point(30, 250);
       this.SelectOutputFolder.Name = "SelectOutputFolder";
       this.SelectOutputFolder.Size = new System.Drawing.Size(280, 60);
       this.SelectOutputFolder.TabIndex = 13;
@@ -175,18 +168,37 @@
       this.SelectOutputFolder.UseVisualStyleBackColor = true;
       this.SelectOutputFolder.Click += new System.EventHandler(this.SelectOutputFolder_Click);
       // 
+      // ResultsText
+      // 
+      this.ResultsText.Location = new System.Drawing.Point(375, 50);
+      this.ResultsText.Multiline = true;
+      this.ResultsText.Name = "ResultsText";
+      this.ResultsText.Size = new System.Drawing.Size(1300, 1900);
+      this.ResultsText.TabIndex = 15;
+      // 
+      // SaveInputFile
+      // 
+      this.SaveInputFile.Location = new System.Drawing.Point(30, 150);
+      this.SaveInputFile.Name = "SaveInputFile";
+      this.SaveInputFile.Size = new System.Drawing.Size(280, 60);
+      this.SaveInputFile.TabIndex = 16;
+      this.SaveInputFile.Text = "Save Input File";
+      this.SaveInputFile.UseVisualStyleBackColor = true;
+      this.SaveInputFile.Click += new System.EventHandler(this.EditInputFile_Click);
+      // 
       // ControlSystemDesign
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.AutoSize = true;
       this.ClientSize = new System.Drawing.Size(3828, 2097);
+      this.Controls.Add(this.SaveInputFile);
+      this.Controls.Add(this.ResultsText);
       this.Controls.Add(this.SelectOutputFolder);
       this.Controls.Add(this.SelectInputFile);
       this.Controls.Add(this.Quit);
       this.Controls.Add(this.Run);
       this.Controls.Add(this.LoadResults);
-      this.Controls.Add(this.ResultsText);
       this.Controls.Add(this.Charthinf);
       this.Controls.Add(this.Charth2);
       this.Controls.Add(this.Plothinf);
@@ -199,6 +211,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.Charth2)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.Charthinf)).EndInit();
       this.ResumeLayout(false);
+      this.PerformLayout();
 
     }
 
@@ -209,12 +222,13 @@
     private System.Windows.Forms.Button PlotPlant;
     private System.Windows.Forms.Button Ploth2;
     private System.Windows.Forms.Button Plothinf;
-    private System.Windows.Forms.RichTextBox ResultsText;
     private System.Windows.Forms.DataVisualization.Charting.Chart ChartPlant;
     private System.Windows.Forms.DataVisualization.Charting.Chart Charth2;
     private System.Windows.Forms.DataVisualization.Charting.Chart Charthinf;
     private System.Windows.Forms.Button SelectInputFile;
     private System.Windows.Forms.Button SelectOutputFolder;
+    private System.Windows.Forms.TextBox ResultsText;
+    private System.Windows.Forms.Button SaveInputFile;
   }
 }
 
