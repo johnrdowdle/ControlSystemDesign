@@ -7,6 +7,7 @@
 // J R Dowdle
 // 1.0.0.0
 // 06-Aug-2017
+// change:  plant frequency responses to red, with solid for max and dashed for min
 //=======================================================================================
 
 // included namespaces
@@ -408,10 +409,14 @@ namespace ControlSystemDesign
       ChartPlant.Series.Add("minimum response");
       ChartPlant.Series["minimum response"].ChartType = SeriesChartType.Line;
       ChartPlant.Series["minimum response"].ChartArea = "PlantFreqRsp";
+      ChartPlant.Series["minimum response"].Color = Color.Red;
+      ChartPlant.Series["minimum response"].BorderDashStyle = ChartDashStyle.Dash;
 
       ChartPlant.Series.Add("maximum response");
       ChartPlant.Series["maximum response"].ChartType = SeriesChartType.Line;
       ChartPlant.Series["maximum response"].ChartArea = "PlantFreqRsp";
+      ChartPlant.Series["maximum response"].Color = Color.Red;
+      ChartPlant.Series["maximum response"].BorderDashStyle = ChartDashStyle.Solid;
       for (int i = 0; i < (m - 1); i++)
       {
         ChartPlant.Series["minimum response"].Points.AddXY(w.GetValue(i), svminP.GetValue(i));
